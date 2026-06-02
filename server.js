@@ -1,3 +1,4 @@
+// 1. server.js basis, dit staat altijd in het begin van server.js, het is de soort van installatie ervan
 // dependencies die via npm install geïnstalleerd zijn 
 import express, { response, urlencoded } from 'express'
 import { Liquid } from 'liquidjs';
@@ -8,7 +9,7 @@ const getData = await fetch ('https://pokeapi.co/api/v2/pokemon?limit=151')
 // met dat fetchen zelf kan je niks dus je leest de JSON data van die fetch af, dit wordt dus je html/liquid. iets waar we wat mee kunnen
 const getDataJSON = await getData.json()
 
-console.log(getDataJSON)
+// console.log(getDataJSON)
 
 //maak een express applicatie aan waarmee we de server configureren 
 const app = express()
@@ -31,4 +32,18 @@ app.set('views', './views')
 // zegt: standaard zijn mijn templates van het type liquid, daarom kun je response.render('index') doen zonder .liquid erachter
 app.set('view engine', 'liquid')
 
+// 2. hier verschijnen routes etc.
+// als iemand de homepage(/) opvraagt, doe dan dit:
+app.get ('/', async function (request, response) {
+// maak index.liquid om naar html en geef hier onderstaande data aan mee
+    response.render('index', {
+// de data die in de template mag, in me liquid kan ik dan {{} pokemon }} gebruiken
+    pokemon: getDataJSON.results
+    })
+})
 
+
+app.set('port', process.env.PORT || 8000)
+app.listen(app.get('port'), function () {
+    console.log(`application started on http://localhost:${app.get('port')}`)
+})
