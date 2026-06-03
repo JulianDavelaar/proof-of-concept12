@@ -10,7 +10,6 @@ const getData = await fetch ('https://pokeapi.co/api/v2/pokemon?limit=151')
 const getDataJSON = await getData.json()
 
 // console.log(getDataJSON)
-
 //maak een express applicatie aan waarmee we de server configureren 
 const app = express()
 
@@ -32,15 +31,34 @@ app.set('views', './views')
 // zegt: standaard zijn mijn templates van het type liquid, daarom kun je response.render('index') doen zonder .liquid erachter
 app.set('view engine', 'liquid')
 
-// 2. hier verschijnen routes etc.
+
+
+
 // als iemand de homepage(/) opvraagt, doe dan dit:
 app.get ('/', async function (request, response) {
+
+// deze const haalt de images uit de API
+// pak mijn lijst van 151 pokemon en stuur deze over de lopende band. item = de pokémon die nu op de band ligt. index = het nummer van zijn plek
+const pokemon    = getDataJSON.results.map(function(item, index) {
+// berekenen van id bulbasaur ligt op plek 0 dus 0+1 = 1 enz. 
+    const id = index + 1 
+// De nieuwe versie die van de band af rolt. name = naam overnemen, id is nieuwe id toewijzen, image = de URL van afbeelding bouwen met id
+    return {
+        name: item.name,
+        id: id,
+        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
+    }
+})
+
 // maak index.liquid om naar html en geef hier onderstaande data aan mee
     response.render('index', {
 // de data die in de template mag, in me liquid kan ik dan {{} pokemon }} gebruiken
-    pokemon: getDataJSON.results
+    pokemon: pokemon
     })
 })
+
+
+
 
 
 app.set('port', process.env.PORT || 8000)
