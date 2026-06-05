@@ -2,11 +2,16 @@
 
 <ul>
   {% for item in pokemon %}
-    <li>
+    <li class="card type-{{ item.type }}">
       <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" >
       <p>{{ item.name }}</p>
+      {% comment %} {% for item in pokemon %}
+        <p>{{ item.name }} - {{ item.type }}</p>
+      {% endfor %} {% endcomment %}
     </li>
   {% endfor %}
 </ul>
+
+
 
 {% render 'partials/foot.liquid' %}
