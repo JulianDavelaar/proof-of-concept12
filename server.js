@@ -39,16 +39,26 @@ app.get ('/', async function (request, response) {
 
 // deze const haalt de images uit de API
 // pak mijn lijst van 151 pokemon en stuur deze over de lopende band. item = de pokémon die nu op de band ligt. index = het nummer van zijn plek
-const pokemon    = getDataJSON.results.map(function(item, index) {
+// promise.all laat wachten op alle 151 detail fetches voor we verder gaan.
+const pokemon = await Promise.all(
+    getDataJSON.results.map(async function(item, index) {
 // berekenen van id bulbasaur ligt op plek 0 dus 0+1 = 1 enz. 
     const id = index + 1 
-// De nieuwe versie die van de band af rolt. name = naam overnemen, id is nieuwe id toewijzen, image = de URL van afbeelding bouwen met id
+
+// Nieuwe regel voor de types zorgt ervoor de we in deze functie wachten op de fetch van de details. betekent: haal alle data van deze pokémon op
+    const detailResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+// data uitlezen
+    const detail = await detailResponse.json()
+// De nieuwe versie die van de band af rolt. name = naam overnemen, id is nieuwe id toewijzen, image = de URL van afbeelding bouwen met id type is ophalen van type
     return {
         name: item.name,
         id: id,
-        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
+        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+// detail.types is de lijst types, [0] is het eerste type, .type.name is de naam ervan
+        type: detail.types[0].type.name
     }
 })
+)
 
 // maak index.liquid om naar html en geef hier onderstaande data aan mee
     response.render('index', {
