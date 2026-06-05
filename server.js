@@ -31,12 +31,6 @@ app.set('views', './views')
 // zegt: standaard zijn mijn templates van het type liquid, daarom kun je response.render('index') doen zonder .liquid erachter
 app.set('view engine', 'liquid')
 
-
-
-
-// als iemand de homepage(/) opvraagt, doe dan dit:
-app.get ('/', async function (request, response) {
-
 // deze const haalt de images uit de API
 // pak mijn lijst van 151 pokemon en stuur deze over de lopende band. item = de pokémon die nu op de band ligt. index = het nummer van zijn plek
 // promise.all laat wachten op alle 151 detail fetches voor we verder gaan.
@@ -59,6 +53,10 @@ const pokemon = await Promise.all(
     }
 })
 )
+
+
+// als iemand de homepage(/) opvraagt, doe dan dit:
+app.get ('/', async function (request, response) {
 
 // maak index.liquid om naar html en geef hier onderstaande data aan mee
     response.render('index', {
