@@ -3,11 +3,17 @@
 <ul>
   {% for item in pokemon %}
     <li class="card type-{{ item.type }}">
-      <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" >
-      <p>{{ item.name }}</p>
-      {% comment %} {% for item in pokemon %}
-        <p>{{ item.name }} - {{ item.type }}</p>
-      {% endfor %} {% endcomment %}
+      <a href="/pokemon/{{ item.id }}">
+
+        <header class="card-top">
+          <h2 class="card-name">{{ item.name }}</h2>
+            <span class="hp">HP {{ item.stats[0].base_stat }}</span>
+        </header>
+
+        <div class="card-window">
+            <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" >
+        </div>
+      </a>
     </li>
   {% endfor %}
 </ul>

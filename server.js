@@ -49,7 +49,11 @@ const pokemon = await Promise.all(
         id: id,
         image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
 // detail.types is de lijst types, [0] is het eerste type, .type.name is de naam ervan
-        type: detail.types[0].type.name
+        type: detail.types[0].type.name,
+        types: detail.types,
+        stats: detail.stats,
+        height: detail.height,
+        weight: detail.weight   
     }
 })
 )
@@ -64,6 +68,23 @@ app.get ('/', async function (request, response) {
     pokemon: pokemon
     })
 })
+
+
+
+//detailpagina per pokémon
+app.get ('/pokemon/:id', async function (request, response) {
+
+// id uit URL halen 
+        const id = request.params.id
+
+        const foundPokemon = pokemon.find(function(item) {
+            return item.id == id
+        })
+
+        response.render('detail', {
+            pokemon: foundPokemon
+        })
+    })
 
 
 

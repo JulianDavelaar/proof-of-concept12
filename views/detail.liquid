@@ -1,0 +1,23 @@
+{% render 'partials/head.liquid' %}
+
+<main>
+    <a href="/">Terug naar overzicht</a>
+
+    <h1>{{ pokemon.name }}</h1>
+
+        {{ pokemon.stats[0].base_stat }}
+
+    {%  for type in pokemon.types  %}
+    <p>{{ type.type.name }}</p>
+    {% endfor %}
+
+    <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" width="300" height="300">
+
+    <h2>Stats</h2>
+        <ul>
+            {%  for stat in pokemon.stats %}
+                <li>{{ stat.stat.name }}: {{ stat.base_stat }}</li>
+            {% endfor %}
+        </ul>
+</main>
+{% render 'partials/foot.liquid' %}
