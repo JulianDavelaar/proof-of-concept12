@@ -1,6 +1,12 @@
 {% render 'partials/head.liquid' %}
 
-<ul>
+<h1 class="page-title">All Pokémon</h1>
+
+    <form class="search" action="/" method="get">
+        <input type="search" name="search" id="search" placeholder="Search"> 
+    </form>
+
+<ul class="pokemon-grid">
   {% for item in pokemon %}
     <li class="card type-{{ item.type }}">
       <a href="/pokemon/{{ item.id }}">
@@ -8,14 +14,20 @@
         <header class="card-top">
           <h2 class="card-name">{{ item.name }}</h2>
             <span class="hp">HP {{ item.stats[0].base_stat }}</span>
-        </header>
+        </header>   
 
         <div class="card-window">
-            <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" >
+            <picture>
+                <source type="image/webp" srcset="{{ item.image }}">
+                <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" >
+            </picture>
         </div>
-      </a>
+     
+     </a>
     </li>
-  {% endfor %}
+    {% else %}
+        <li class="empty-state">No Pokémon found</li>
+    {% endfor %}
 </ul>
 
 
