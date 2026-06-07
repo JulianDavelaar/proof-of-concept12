@@ -1,0 +1,47 @@
+.detail {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.detail .card-name {
+    font-size: 1.5rem;
+}
+
+.detail .hp {
+    font-size: 1.2rem;
+}
+
+.detail-types {
+    display: flex;
+    gap: .5rem;
+    list-style: none;
+    margin: 1rem 0;
+}
+
+.detail-types li {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: .25rem .75rem;
+    border-radius: 999px;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.detail-stats {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: var(--border-pokemoncard);
+    padding: 1rem;
+}
+
+.detail-stats ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.detail-stats li {
+    display: flex;
+    justify-content: space-between;
+    padding: .25rem 0;
+    text-transform: capitalize;
+}

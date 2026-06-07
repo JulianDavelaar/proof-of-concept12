@@ -1,23 +1,38 @@
 {% render 'partials/head.liquid' %}
 
-<main>
-    <a href="/">Terug naar overzicht</a>
+<main class="detail">
+    <a href="/" class="back-link">Terug naar overzicht</a>
 
-    <h1>{{ pokemon.name }}</h1>
+<article class="card type-{{ pokemon.type }}">
 
-        {{ pokemon.stats[0].base_stat }}
+    <header class="card-top">
+        <h1 class="card-name">{{ pokemon.name }}</h1>
+        <span class="hp"> HP {{ pokemon.stats[0].base_stat }}</span>
+    </header>
 
-    {%  for type in pokemon.types  %}
-    <p>{{ type.type.name }}</p>
-    {% endfor %}
+    <div class="card-window">
+        <picture>
+            <source type="image/webp" srcset="{{ pokemon.image }}">
+            <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" width="150" height="150" >
+        </picture>
+    </div>
 
-    <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" width="300" height="300">
+    <ul class="detail-types">
+        {% for type in pokemon.types %}
+            <li>{{ type.type.name }}</li>
+        {% endfor %}
+    </ul>
 
-    <h2>Stats</h2>
-        <ul>
+    <section class="detail-stats">
+        <h2>Stats</h2>
+          <ul>
             {%  for stat in pokemon.stats %}
-                <li>{{ stat.stat.name }}: {{ stat.base_stat }}</li>
+                <li><span>{{ stat.stat.name }}</span> <span>{{ stat.base_stat }}</span></li>
             {% endfor %}
         </ul>
+    </section>
+
+</article>
+
 </main>
 {% render 'partials/foot.liquid' %}
