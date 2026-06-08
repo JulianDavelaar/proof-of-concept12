@@ -27,7 +27,13 @@
         <h2>Stats</h2>
           <ul>
             {%  for stat in pokemon.stats %}
-                <li><span>{{ stat.stat.name }}</span> <span>{{ stat.base_stat }}</span></li>
+                <li class="stat-row">
+                    <span class="stat-name">{{ stat.stat.name }}</span> 
+                    <span class="stat-value">{{ stat.base_stat }}</span>
+                    <div class="stat-bar">
+                    <div class="stat-fill" style="width:{{ stat.base_stat }}%"></div>
+                    </div>
+                </li>
             {% endfor %}
         </ul>
     </section>

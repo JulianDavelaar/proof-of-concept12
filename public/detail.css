@@ -31,6 +31,33 @@
     background-color: rgba(255, 255, 255, 0.6);
     border-radius: var(--border-pokemoncard);
     padding: 1rem;
+
+        .stat-row {
+        display: grid;
+        grid-template-columns: 6rem 2rem 1fr;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.3rem 0;
+        text-transform: capitalize;
+        }
+
+        .stat-value {
+        text-align: right;
+        font-weight: bold;
+        }
+
+        .stat-bar {
+        background-color: rgba(0, 0, 0, 0.1);   /* de lege "track" */
+        border-radius: 999px;
+        height: 8px;
+        overflow: hidden;
+        }
+
+        .stat-fill {
+        background-color: #333;                  /* het gevulde deel */
+        height: 100%;
+        border-radius: 999px;
+}
 }
 
 .detail-stats ul {
