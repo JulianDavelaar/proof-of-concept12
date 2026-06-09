@@ -73,6 +73,7 @@ try {
         const id = request.params.id
         const detailResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
 if (!detailResponse.ok) {
+    if (!foundPokemon) {
     return response.status(404).render('404')
 }
 
