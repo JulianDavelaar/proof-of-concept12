@@ -22,40 +22,33 @@ app.set('views', './views')
 app.set('view engine', 'liquid')
 
 
+//lijst van 151 pokémon ophalen
+const getData = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+const getDataJSON = await getData.json()
 
-// als iemand de homepage(/) opvraagt, doe dan dit:
-app.get ('/', async function (request, response) {
-try {
-    //zoekterm van URL uitlezen (?search)
-    const search = (request.query.search || '').trim()
+// lege lijst die we vullen met loop
+let pokemon = []
 
-    //lijst van 151 pokémon ophalen
-    const getData = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
-    const getDataJSON = await getData.json()
+//loop door resultaten index begint bij - dus +1
+for (const [index, item] of getDataJSON.results.entries()) {
+    const id = index + 1 
 
-    // lege lijst die we vullen met loop
-    let pokemon = []
+//per pokémon details ophalen
+const detailResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+const detail = await detailResponse.json()
 
-    //loop door resultaten index begint bij - dus +1
-    for (const [index, item] of getDataJSON.results.entries()) {
-        const id = index + 1 
-
-    //per pokémon details ophalen
-    const detailResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-    const detail = await detailResponse.json()
-
-    //pokémon toevoegen aan lijst
-    pokemon.push({
-        name: item.name,
-        id: id,
-        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
-        // detail.types is de lijst types, [0] is het eerste type, .type.name is de naam ervan
-        type: detail.types[0].type.name,
-        types: detail.types,
-        stats: detail.stats,
-        height: detail.height,
-        weight: detail.weight  
-    })
+//pokémon toevoegen aan lijst
+pokemon.push({
+    name: item.name,
+    id: id,
+    image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${id}.gif`,
+    // detail.types is de lijst types, [0] is het eerste type, .type.name is de naam ervan
+    type: detail.types[0].type.name,
+    types: detail.types,
+    stats: detail.stats,
+    height: detail.height,
+    weight: detail.weight  
+})
 }
 
 //filteren op zoekterm
@@ -63,19 +56,17 @@ if (search.length > 0) {
     pokemon = pokemon.filter(function (item) {
         return item.name.includes(search.toLowerCase())
     })
-}
+  }
 
-// maak index.liquid om naar html en geef hier onderstaande data aan mee
-    response.render('index', { pokemon: pokemon, search: search})
- } catch (error) {
-    response.redirect('/?error=true')
- }
+  response.render('index', { pokemon: results, search: search })
 })
 
 
 
+
+
 //detailpagina per pokémon
-app.get ('/pokemon/:id', async function (request, response) {
+app.get ('/pokemon/:id', function (request, response) {
 
 // id uit URL halen 
 try {
@@ -85,24 +76,9 @@ if (!detailResponse.ok) {
     return response.status(404).render('404')
 }
 
-const detail = await detailResponse.json()
-const pokemon = { 
-        name: detail.name,
-        id: id,
-        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
-        // detail.types is de lijst types, [0] is het eerste type, .type.name is de naam ervan
-        type: detail.types[0].type.name,
-        types: detail.types,
-        stats: detail.stats,
-        height: detail.height,
-        weight: detail.weight  
-    }
+response.render('detail', {pokemon: foundPokemon })
+})
 
-        response.render('detail', { pokemon: pokemon})
- } catch (error) {
-    response.redirect('/?error=true')
- }
- })
 
 
 app.set('port', process.env.PORT || 8000)
