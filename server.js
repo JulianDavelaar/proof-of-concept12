@@ -51,10 +51,14 @@ pokemon.push({
 })
 }
 
-//filteren op zoekterm
-if (search.length > 0) {
-    pokemon = pokemon.filter(function (item) {
-        return item.name.includes(search.toLowerCase())
+// als iemand de homepage(/) opvraagt, doe dan dit:
+app.get ('/', function (request, response) {
+
+    const search = (request.query.search || '').trim()
+    let results = pokemon
+    if (search.length > 0) {
+    results = pokemon.filter(function (item) {
+      return item.name.includes(search.toLowerCase())
     })
   }
 
@@ -69,10 +73,12 @@ if (search.length > 0) {
 app.get ('/pokemon/:id', function (request, response) {
 
 // id uit URL halen 
-try {
-        const id = request.params.id
-        const detailResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-if (!detailResponse.ok) {
+    const id = request.params.id
+
+    const foundPokemon = pokemon.find(function (item) {
+        return item.id == id
+})
+
     if (!foundPokemon) {
     return response.status(404).render('404')
 }
