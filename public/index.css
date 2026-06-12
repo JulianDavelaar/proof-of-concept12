@@ -56,8 +56,9 @@ body {
 }
 
 .card {
+    position: relative;
     border-radius: var(--border-pokemoncard);
-    padding: .5rem;
+    padding: .75rem;
 }
 
 .card-top {
@@ -110,6 +111,23 @@ body {
         transform: scale(1.15);
         transition: .2s;
     }
+
+     img {
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+     }
+
+     &:hover img {
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.45));
+     }
+
+
+}
+
+.favorite-form {
+    position: absolute;
+    top: .45rem ;
+    right: 3.75rem;
+    
 }
 
 
