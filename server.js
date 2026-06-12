@@ -86,7 +86,33 @@ app.get ('/pokemon/:id', function (request, response) {
 response.render('detail', {pokemon: foundPokemon })
 })
 
+//Favoriet toevoegen form post zonder JS
+app.post('/pokemon/:id/favorite', async function (request, response) {
+    await fetch('https://fdnd.directus.app/items/messages', {
+        method: 'POST',
+        body: JSON.stringify({ 
+            for: 'favorites-julian',
+            text: request.params.id
+        }),
+        headers: { 'content-type': 'application/json;charset=UTF-8' }
+    })
 
+    response.redirect(303, request.get('referer') || '/')
+})
+
+
+app.get('/favorites', async function (request, response) {
+    const params = new URLSearchParams({ 'filter[for]':  'favorites-julian'})
+    const favResponse = await fetch('https://fdnd.directus.app/items/messages?' + params)
+    const favJSON = await favResponse.json()
+
+    const favoritePokemon = favJSON.data.map(function (message) {
+        return pokemon.find(function (item) { return item.id == message.text })
+    })
+    .filter(function (item) { return item })
+
+  response.render('favorites', { pokemon: favoritePokemon })
+})
 
 app.set('port', process.env.PORT || 8000)
 app.listen(app.get('port'), function () {

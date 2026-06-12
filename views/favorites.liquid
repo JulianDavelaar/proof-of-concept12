@@ -1,0 +1,29 @@
+{% render 'partials/head.liquid' %}
+
+<h1 class="page-title">My favorite pokémon</h1>
+
+<ul class="pokemon-grid">
+  {% for item in pokemon %}
+    <li class="card type-{{ item.type }}">
+      <a href="/pokemon/{{ item.id }}">
+
+        <header class="card-top">
+          <h2 class="card-name">{{ item.name }}</h2>
+            <span class="hp">HP {{ item.stats[0].base_stat }}</span>
+        </header>   
+
+        <div class="card-window">
+            <picture>
+              <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" >
+            </picture>
+        </div>
+     </a>
+    </li>
+    {% else %}
+        <li class="empty-state">No favorites yet - go catch some!</li>
+    {% endfor %}
+</ul>
+
+
+
+{% render 'partials/foot.liquid' %}

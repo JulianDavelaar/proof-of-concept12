@@ -9,20 +9,23 @@
 <ul class="pokemon-grid">
   {% for item in pokemon %}
     <li class="card type-{{ item.type }}">
-      <a href="/pokemon/{{ item.id }}">
+      <form class="favorite-form" action="/pokemon/{{  item.id }}/favorite" method="post">
 
+      <a href="/pokemon/{{ item.id }}">
         <header class="card-top">
           <h2 class="card-name">{{ item.name }}</h2>
-            <span class="hp">HP {{ item.stats[0].base_stat }}</span>
+              <button type="submit" class="favorite-button">
+                <img src="/assets/pokeball.svg" alt="" width="30" height="30">
+              </button>
+            </form>
+              <span class="hp">HP {{ item.stats[0].base_stat }}</span>
         </header>   
 
         <div class="card-window">
             <picture>
-                <source type="image/webp" srcset="{{ item.image }}">
                 <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" >
             </picture>
         </div>
-     
      </a>
     </li>
     {% else %}

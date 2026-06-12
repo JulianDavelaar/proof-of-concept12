@@ -99,7 +99,18 @@ body {
     }
 }
 
+.favorite-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 0;
+    transition: .2s;
 
+    &:hover {
+        transform: scale(1.15);
+        transition: .2s;
+    }
+}
 
 
 
