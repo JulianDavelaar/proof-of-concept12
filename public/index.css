@@ -119,11 +119,11 @@ body {
     }
 
      img {
-        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .8));
      }
 
      &:hover img {
-        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.45));
+        filter: drop-shadow(0 6px 6px rgba(0, 0, 0, .8));
      }
 
 
@@ -131,9 +131,27 @@ body {
 
 .favorite-form {
     position: absolute;
-    top: .45rem ;
-    right: 3.75rem;
+    top: .5rem ;
+    right: .5rem;
+    z-index: 1;
+}
+
+.favorite-link {
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+    transition: .2s;
+
     
+    &:hover {
+        transform: scale(1.15);
+        transition: .2s;
+    }
+
+
 }
 
 

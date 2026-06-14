@@ -7,6 +7,13 @@
 <ul class="pokemon-grid">
   {% for item in pokemon %}
     <li class="card type-{{ item.type }}">
+
+       <form class="favorite-form" action="/pokemon/{{ item.id }}/favorite" method="post">
+        <button type="submit" class="favorite-button">
+          <img src="/assets/pokeball.svg" alt="" width="30" height="30">
+        </button>
+      </form>
+
       <a href="/pokemon/{{ item.id }}">
 
         <header class="card-top">

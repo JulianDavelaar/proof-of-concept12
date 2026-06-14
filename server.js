@@ -14,6 +14,10 @@ app.use(express.urlencoded({extended: true}))
 // Gebruik de map 'public' voor statische bestanden (resources zoals CSS, JavaScript, afbeeldingen en fonts) Bestanden in deze map kunnen dus door de browser gebruikt worden
 app.use(express.static('public'))
 
+app.use(function (request, response, next) {
+    response.locals.favorite = request.query.favorite 
+    next()
+})
 
 // start de liquid template engine op
 const engine = new Liquid();
@@ -88,17 +92,42 @@ response.render('detail', {pokemon: foundPokemon })
 
 //Favoriet toevoegen form post zonder JS
 app.post('/pokemon/:id/favorite', async function (request, response) {
-    await fetch('https://fdnd.directus.app/items/messages', {
-        method: 'POST',
-        body: JSON.stringify({ 
-            for: 'favorites-julian',
-            text: request.params.id
-        }),
-        headers: { 'content-type': 'application/json;charset=UTF-8' }
-    })
+    const id = request.params.id
+    const filterFor = 'favorites-julian'
+    const back = request.get('referer') || '/'
 
-    response.redirect(303, request.get('referer') || '/')
+    try {
+
+    const checkParams = new URLSearchParams({ 'filter[for]': filterFor, 'filter[text]': id})
+    const checkResponse = await fetch('https://fdnd.directus.app/items/messages?' + checkParams)
+    const checkJSON = await checkResponse.json()
+
+    let status
+    if (checkJSON.data.length > 0) {
+        for (const message of checkJSON.data) {
+            await fetch('https://fdnd.directus.app/items/messages/' + message.id, { method: 'DELETE'})
+        }
+        status = 'removed'
+    }
+    else {
+        await fetch('https://fdnd.directus.app/items/messages', {
+            method: 'POST',
+            body: JSON.stringify({ for: filterFor, text: id}),
+            headers: { 'content-type': 'application/json;charset=UTF-8' }
+        })
+        status = 'added'
+    }
+    
+    const back = new URL(request.get('referer') || '/', `http://${request.get('host')}`)
+    back.searchParams.set('favorite', status)
+    response.redirect(303, back.pathname + back.search)  
+  }
+
+    catch (error) {
+        response.redirect(303, back)
+    } 
 })
+
 
 
 app.get('/favorites', async function (request, response) {

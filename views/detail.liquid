@@ -6,18 +6,20 @@
 
 <article class="card type-{{ pokemon.type }}">
 
-    <form class="favorite-form" action="/pokemon{{ pokemon.id }}/favorite">
-        <button type="submit" class="favorite-button">
-            <img src="/assets/pokeball.svg" alt="" width="30" height="30">
-        </button>
-    </form>
-    
     <header class="card-top">
         <h1 class="card-name">{{ pokemon.name }}</h1>
         <span class="hp"> HP {{ pokemon.stats[0].base_stat }}</span>
     </header>
 
+    
     <div class="card-window">
+
+        <form class="favorite-form" action="/pokemon/{{ pokemon.id }}/favorite" method="post">
+            <button type="submit" class="favorite-button">
+                <img src="/assets/pokeball.svg" alt="" width="50" height="50">
+            </button>
+        </form>
+
         <picture>
             <source type="image/webp" srcset="{{ pokemon.image }}">
             <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" width="150" height="150" >
