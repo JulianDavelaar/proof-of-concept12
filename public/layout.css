@@ -1,0 +1,22 @@
+.confirm {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--pokemon-red);
+    color: #ffff;
+    padding: .75rem 1rem;
+    border-radius: var(--border-pokemoncard);
+    z-index: 10;
+    animation: fade 4s forwards;
+}
+
+@keyframes fade{
+    0% { opacity: 0; transform: translate(-50%, 1rem);}
+  
+    25% { opacity: 1; transform: translate(-50%, 0);}
+
+    75% { opacity: 1; transform: translate(-50%, 0);}
+
+    100% { opacity: 0; visibility: hidden; transform: translate(-50%, 0);}
+}
