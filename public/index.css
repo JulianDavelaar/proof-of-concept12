@@ -1,6 +1,8 @@
 body {
     max-width: 1200px;
     margin: 0 auto;
+    font-family: 'Pokemon', sans-serif;
+
 }
 .header {
     display: flex;
@@ -77,13 +79,17 @@ body {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
-
+    font-family: 'Pokemon', sans-serif;
+    font-size: .9rem;
+    
 }
 
 .hp {
     font-weight: bold;
     font-size: 1rem;
     white-space: nowrap;
+    font-family: 'Pokemon', sans-serif;
+    font-size: .6rem;
 }
 
 .card-window {
