@@ -1,4 +1,5 @@
-{% render 'partials/head.liquid' %}
+{% layout 'layouts/base.liquid' %}
+{% block content %}
 
 <h1 class="page-title">My favorite pokémon</h1>
   <a href="/" class="back-link">Back</a>
@@ -27,4 +28,4 @@
 
 
 
-{% render 'partials/foot.liquid' %}
+{% endblock %}

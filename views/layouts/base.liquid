@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="/index.css">
         <link rel="stylesheet" href="/detail.css">
         <link rel="stylesheet" href="/404.css">
+        <link rel="stylesheet" href="/layout.css">
         <link rel="stylesheet" href="/stylesheet.css">
 
         <title>{{ title }}</title>
@@ -16,5 +17,17 @@
             <img src="/assets/logo.svg" alt="Pokémon" class="logo" width="200" height="74">
         </a>
 
-        <a href="/favorites">Favorites</a>
+
+        {% if favorite == "added" %}
+            <p class="confirm">Added to favorites</p>
+        {% elsif favorite == "removed" %}
+            <p class="confirm">Removed from favorites</p>
+        {% endif %}
     </header>
+
+    
+    {% block content %}{% endblock %}
+
+
+    </body>
+</html>

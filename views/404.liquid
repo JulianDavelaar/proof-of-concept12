@@ -1,4 +1,5 @@
-{% render 'partials/head.liquid' %}
+{% layout 'layouts/base.liquid' %}
+{% block content %}
 
 <main class="not-found">
     <h1 class="h11">404 — Pokémon not found</h1>
@@ -10,5 +11,4 @@
     <a href="/">Back to overview</a>
 </main>
 
-{% render 'partials/foot.liquid' %}
-
+{% endblock %}
