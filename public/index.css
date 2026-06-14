@@ -93,13 +93,15 @@ body {
 }
 
 .card-window {
-  background-color: rgba(255, 255, 255, 0.5);
-  border: 2px solid rgba(0, 0, 0, 0.3);
-  border-radius: 0.5rem;
-  aspect-ratio: 1;            /* venster is altijd vierkant */
-  overflow: hidden;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    aspect-ratio: 1;     
+    overflow: hidden;
+    place-items: center;
 
-    & img {
+    & picture img {
         width: 100%;
         height: 100%;
         object-fit: contain;
@@ -112,6 +114,7 @@ body {
     cursor: pointer;
     line-height: 0;
     transition: .2s;
+    
 
     &:hover {
         transform: scale(1.15);

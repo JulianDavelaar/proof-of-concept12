@@ -3,31 +3,43 @@
 
 <h1 class="page-title">All Pokémon</h1>
 
-    <form class="search" action="/" method="get">
-        <input type="search" name="search" id="search" placeholder="Search"> 
-    </form>
+<form class="search" action="/" method="get">
+    <input type="search" name="search" id="search" placeholder="Search"> 
+</form>
+  
+<a class="favorite-link" href="/favorites">Favorites 
+  <img class="favorite-button" src="/assets/pokeball.svg" alt="" width="30" height="30">
+</a>
+
 
 <ul class="pokemon-grid">
-  {% for item in pokemon %}
-    <li class="card type-{{ item.type }}">
-      <form class="favorite-form" action="/pokemon/{{ item.id }}/favorite" method="post">
-        <button type="submit" class="favorite-button">
-          <img src="/assets/pokeball.svg" alt="" width="30" height="30">
-        </button>
-      </form>
 
-      <a href="/pokemon/{{ item.id }}">
+  {% for item in pokemon %}
+
+    <li class="card type-{{ item.type }}">
+
+      <a class="card-link" href="/pokemon/{{ item.id }}">
         <header class="card-top">
           <h2 class="card-name">{{ item.name }}</h2>
             <span class="hp">HP {{ item.stats[0].base_stat }}</span>
         </header>   
+      </a>
 
-        <div class="card-window">
+      <div class="card-window">
+        <form class="favorite-form" action="/pokemon/{{ item.id }}/favorite" method="post">
+          <button type="submit" class="favorite-button">
+            <img src="/assets/pokeball.svg" alt="" width="40" height="40">
+          </button>
+      </form>
+
+      <a href="/pokemon/{{ item.id }}">
           <picture>
              <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" >
           </picture>
         </div>
-     </a>
+      </a>
+    </div>
+
     </li>
     {% else %}
         <li class="empty-state">No Pokémon found</li>
