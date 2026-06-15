@@ -5,6 +5,7 @@
 <h1 class="page-title">All Pokémon</h1>
 
 <form class="search" action="/" method="get">
+  <i class="searchIcon"></i>
   <input type="search" name="search" id="search" placeholder="Search"> 
 </form>
   
@@ -17,7 +18,7 @@
 
   {% for item in pokemon %}
 
-    <li class="card type-{{ item.type }}">
+    <li class="card type-{{ item.type }}" data-name="{{ item.name }}">
 
       <a class="card-link" href="/pokemon/{{ item.id }}">
         <header class="card-top">
@@ -35,7 +36,13 @@
 
         <a href="/pokemon/{{ item.id }}">
           <picture>
-            <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" >
+            <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" 
+              loading="
+              {% if forloop.index <= 8 %} 
+                eager
+              {% else %}
+                lazy
+              {% endif %}" decoding="async">
           </picture>
         </a>
       </div>
