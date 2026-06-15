@@ -13,25 +13,26 @@
 
     <li class="card type-{{ item.type }}">
 
-      <form class="favorite-form" action="/pokemon/{{ item.id }}/favorite" method="post">
-        <button type="submit" class="favorite-button">
-          <img src="/assets/pokeball.svg" alt="" width="30" height="30">
-        </button>
-      </form>
-
-      <a href="/pokemon/{{ item.id }}">
-
+      <a class="card-link" href="/pokemon/{{ item.id }}">
         <header class="card-top">
           <h2 class="card-name">{{ item.name }}</h2>
-            <span class="hp">HP {{ item.stats[0].base_stat }}</span>
-        </header>   
+          <span class="hp">HP {{ item.stats[0].base_stat }}</span>
+        </header>
+      </a>
 
-        <div class="card-window">
+      <div class="card-window">
+        <form class="favorite-form" action="/pokemon/{{ item.id }}/favorite" method="post">
+          <button type="submit" class="favorite-button">
+            <img src="/assets/pokeball.svg" alt="" width="30" height="30">
+          </button>
+        </form>
+
+        <a href="/pokemon/{{ item.id }}">
           <picture>
             <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" >
           </picture>
-        </div>
-      </a>
+        </a>
+      </div>
     </li>
 
   {% else %}

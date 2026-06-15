@@ -66,7 +66,7 @@ app.get ('/', function (request, response) {
     return item.name.includes(search.toLowerCase())
     })
   }
-  response.render('index', { pokemon: results, search: search })
+  response.render('index', { pokemon: results, search: search, title: 'All Pokémon' })
 })
 
 
@@ -82,16 +82,16 @@ app.get ('/pokemon/:id', function (request, response) {
     return item.id == id
     })
     if (!foundPokemon) {
-    return response.status(404).render('404')
-  }  
-  response.render('detail', {pokemon: foundPokemon })
+    return response.status(404).render('404', { title: 'Pokémon not found' })
+  }
+  response.render('detail', {pokemon: foundPokemon, title: foundPokemon.name })
 })
 
 //Favoriet toevoegen form post zonder JS
 app.post('/pokemon/:id/favorite', async function (request, response) {
     const id = request.params.id
     const filterFor = 'favorites-julian'
-    const back = request.get('referer') || '/'
+    const back = new URL(request.get('referer') || '/', `http://${request.get('host')}`)
 
     try {
 
@@ -119,14 +119,13 @@ app.post('/pokemon/:id/favorite', async function (request, response) {
     status = 'added'
     }
     
-    const back = new URL(request.get('referer') || '/', `http://${request.get('host')}`)
     back.searchParams.set('favorite', status)
-    response.redirect(303, back.pathname + back.search)  
+    response.redirect(303, back.pathname + back.search)
   }
 
     catch (error) {
-    response.redirect(303, back)
-  } 
+    response.redirect(303, back.pathname + back.search)
+  }
 })
 
 app.get('/favorites', async function (request, response) {
@@ -139,7 +138,12 @@ app.get('/favorites', async function (request, response) {
     })
     .filter(function (item) { return item })
 
-  response.render('favorites', { pokemon: favoritePokemon })
+  response.render('favorites', { pokemon: favoritePokemon, title: 'My favorite Pokémon' })
+})
+
+// 404 voor alle overige (onbekende) routes
+app.use(function (request, response) {
+    response.status(404).render('404', { title: 'Pokémon not found' })
 })
 
 app.set('port', process.env.PORT || 8000)
