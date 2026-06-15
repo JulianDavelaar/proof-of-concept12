@@ -43,6 +43,7 @@ const detail = await detailResponse.json()
 
 //pokémon toevoegen aan lijst
 pokemon.push({
+
     name: item.name,
     id: id,
     image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${id}.gif`,
@@ -52,7 +53,7 @@ pokemon.push({
     stats: detail.stats,
     height: detail.height,
     weight: detail.weight  
-})
+    })
 }
 
 // als iemand de homepage(/) opvraagt, doe dan dit:
@@ -62,10 +63,9 @@ app.get ('/', function (request, response) {
     let results = pokemon
     if (search.length > 0) {
     results = pokemon.filter(function (item) {
-      return item.name.includes(search.toLowerCase())
+    return item.name.includes(search.toLowerCase())
     })
   }
-
   response.render('index', { pokemon: results, search: search })
 })
 
@@ -78,16 +78,13 @@ app.get ('/pokemon/:id', function (request, response) {
 
 // id uit URL halen 
     const id = request.params.id
-
     const foundPokemon = pokemon.find(function (item) {
-        return item.id == id
-})
-
+    return item.id == id
+    })
     if (!foundPokemon) {
     return response.status(404).render('404')
-}
-
-response.render('detail', {pokemon: foundPokemon })
+  }  
+  response.render('detail', {pokemon: foundPokemon })
 })
 
 //Favoriet toevoegen form post zonder JS
@@ -98,24 +95,28 @@ app.post('/pokemon/:id/favorite', async function (request, response) {
 
     try {
 
-    const checkParams = new URLSearchParams({ 'filter[for]': filterFor, 'filter[text]': id})
-    const checkResponse = await fetch('https://fdnd.directus.app/items/messages?' + checkParams)
-    const checkJSON = await checkResponse.json()
+        const checkParams = new URLSearchParams({ 'filter[for]': filterFor, 'filter[text]': id})
+        const checkResponse = await fetch('https://fdnd.directus.app/items/messages?' + checkParams)
+        const checkJSON = await checkResponse.json()
+
 
     let status
-    if (checkJSON.data.length > 0) {
+
+        if (checkJSON.data.length > 0) {
         for (const message of checkJSON.data) {
-            await fetch('https://fdnd.directus.app/items/messages/' + message.id, { method: 'DELETE'})
+        await fetch('https://fdnd.directus.app/items/messages/' + message.id, { method: 'DELETE'})
         }
-        status = 'removed'
+    status = 'removed'
     }
+
     else {
+
         await fetch('https://fdnd.directus.app/items/messages', {
-            method: 'POST',
-            body: JSON.stringify({ for: filterFor, text: id}),
-            headers: { 'content-type': 'application/json;charset=UTF-8' }
+        method: 'POST',
+        body: JSON.stringify({ for: filterFor, text: id}),
+        headers: { 'content-type': 'application/json;charset=UTF-8' }
         })
-        status = 'added'
+    status = 'added'
     }
     
     const back = new URL(request.get('referer') || '/', `http://${request.get('host')}`)
@@ -124,11 +125,9 @@ app.post('/pokemon/:id/favorite', async function (request, response) {
   }
 
     catch (error) {
-        response.redirect(303, back)
-    } 
+    response.redirect(303, back)
+  } 
 })
-
-
 
 app.get('/favorites', async function (request, response) {
     const params = new URLSearchParams({ 'filter[for]':  'favorites-julian'})

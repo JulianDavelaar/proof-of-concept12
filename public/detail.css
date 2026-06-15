@@ -55,7 +55,7 @@
         .stat-fill {
         background-color: #333;                  /* het gevulde deel */
         height: 100%;
-}
+    }
 }
 
 .detail-stats ul {
@@ -81,17 +81,17 @@
     margin: 1rem;
     transition: transform .15s;
 
-    &::before {
-    content: "";
-    width: 0;
-    height: 0;
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
-    border-right: 25px solid var(--pokemon-red);   
-    }
+        &::before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        border-right: 25px solid var(--pokemon-red);   
+        }
 
-    &:hover {
-        transform: scale(1.1);
+        &:hover {
+            transform: scale(1.1);
     }
-    
+        
 }
