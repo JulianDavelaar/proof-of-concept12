@@ -1,33 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/index.css">
-        <link rel="stylesheet" href="/detail.css">
-        <link rel="stylesheet" href="/404.css">
-        <link rel="stylesheet" href="/layout.css">
-        <link rel="stylesheet" href="/stylesheet.css">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="/detail.css">
+    <link rel="stylesheet" href="/404.css">
+    <link rel="stylesheet" href="/layout.css">
+    <link rel="stylesheet" href="/stylesheet.css">
 
-        <title>{{ title }}</title>
-    </head>
+    <title>{{ title }}</title>
+  </head>
+
 <body>
-    <header class="header">
-        <a href="/">
-            <img src="/assets/logo.svg" alt="Pokémon" class="logo" width="200" height="74">
-        </a>
+  <header class="header">
+    <a href="/">
+      <img src="/assets/logo.svg" alt="Pokémon" class="logo" width="200" height="74">
+    </a>
 
-
-        {% if favorite == "added" %}
-            <p class="confirm">Added to favorites</p>
-        {% elsif favorite == "removed" %}
-            <p class="confirm">Removed from favorites</p>
-        {% endif %}
-    </header>
-
-    
+    {% if favorite == "added" %}
+      <p class="confirm">Added to favorites</p>
+    {% elsif favorite == "removed" %}
+      <p class="confirm">Removed from favorites</p>
+    {% endif %}
+  </header>
     {% block content %}{% endblock %}
-
-
-    </body>
+</body>
 </html>
