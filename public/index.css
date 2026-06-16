@@ -58,6 +58,13 @@ body {
     position: relative;
     border-radius: var(--border-pokemoncard);
     padding: .75rem;
+    transition: .2s;
+
+    &:hover {
+        transform: translateY(-.75rem);
+        transition: .2s;
+
+    }
 }
 
 .card-top {
