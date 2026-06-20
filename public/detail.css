@@ -19,8 +19,7 @@
     margin: 1rem 0;
 }
 
-.detail-types li {
-    background-color: rgba(255, 255, 255, 0.6);
+.detail-types li{
     padding: .25rem .75rem;
     border-radius: 999px;
     text-transform: capitalize;
@@ -28,26 +27,27 @@
 }
 
 .detail-stats {
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: var(--color-surface);
     border-radius: var(--border-pokemoncard);
     padding: 1rem;
 
         .stat-row {
         display: grid;
-        grid-template-columns: 6rem 2rem 1fr;
+        grid-template-columns: 7rem 2.8rem 1fr;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.3rem 0;
+        padding: 0.3rem 2rem;
         text-transform: capitalize;
         }
 
         .stat-value {
+        margin: 0;
         text-align: right;
         font-weight: bold;
         }
 
         .stat-bar {
-        background-color: rgba(0, 0, 0, 0.1);   /* de lege "track" */
+        background-color: var(--color-bar);
         height: 8px;
         overflow: hidden;
         }
@@ -55,28 +55,26 @@
         .stat-fill {
         background-color: #333;                  /* het gevulde deel */
         height: 100%;
-    }
+        }
+
+        h2 {
+            padding: 0 2rem;
+        }
 }
 
-.detail-stats ul {
+.detail-stats {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.detail-stats li {
-    display: flex;
-    justify-content: space-between;
-    padding: .25rem 0;
-    text-transform: capitalize;
-}
 
 .back-link {
     display: inline-flex;
     align-items: center;
     gap: .5rem;
     text-decoration: none;
-    color: black;
+    color: var(--color-text);
     font-size: 1rem;                     
     margin: 1rem;
     transition: transform .15s;

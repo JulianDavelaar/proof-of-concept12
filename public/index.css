@@ -1,4 +1,6 @@
 body {
+    background-color: var(--color-background);
+    color: var(--color-text);
     max-width: 1200px;
     margin: 0 auto;
     font-family: 'Pokemon', sans-serif;
@@ -50,7 +52,7 @@ body {
 
 .card a {
     text-decoration: none;
-    color: black;
+    color: var(--color-text);
     display: block;
 }
 
@@ -95,12 +97,14 @@ body {
 
 .card-window {
     position: relative;
-    background-color: rgba(255, 255, 255, 0.5);
-    border: 2px solid rgba(0, 0, 0, 0.3);
+    background-color: var(--color-window);
+    border: 2px solid var(--color-border);
     border-radius: 0.5rem;
     aspect-ratio: 1;     
     overflow: hidden;
     place-items: center;
+    padding: 2rem 0 0 1rem;
+    margin: 0;
 
         & picture img {
             width: 200px;
@@ -143,7 +147,7 @@ body {
     justify-content: center;
     gap: .5rem;
     text-decoration: none;
-    color: #000;
+    color: var(--color-text);
     font-size: 1rem;
     transition: .2s;
 

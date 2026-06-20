@@ -5,6 +5,8 @@
 }
 
 :root {
+
+    /* Light mode */
     /* Type colours */
 
     --type-grass:    #7AC74C;
@@ -34,7 +36,62 @@
     --pokemon-yellow: #ffcb05;
     --pokemon-yellow-shadow: #c7a008;
 
+    
     /* borders */
-
     --border-pokemoncard:     8px;
+
+
+    /* Light mode */
+    --color-background: #ffffff;
+    --color-text: #000000;
+    --color-surface:    rgba(255, 255, 255, 0.6);
+    --color-window:     rgba(255, 255, 255, 0.5);
+    --color-track:      rgba(0, 0, 0, 0.1);
+    --color-border:     rgba(0, 0, 0, 0.3);
+}
+
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+       :root:not([data-theme="light"]) {
+        --color-background: #000000;
+        --color-text: #ffffff;
+        --color-surface:    rgba(0, 0, 0, 0.35);
+        --color-window:     rgba(0, 0, 0, 0.3);
+        --color-bar:      rgba(255, 255, 255, 0.15);
+        --color-border:     rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    :root[data-theme="dark"] {
+        --color-background: #000000;
+        --color-text: #ffffff;
+        --color-surface:    rgba(0, 0, 0, 0.35);
+        --color-window:     rgba(0, 0, 0, 0.3);
+        --color-bar:      rgba(255, 255, 255, 0.15);
+        --color-border:     rgba(255, 255, 255, 0.2);
+        }
+
+
+    :root[data-theme="light"] {
+    --color-background: #ffffff;
+    --color-text: #000000;
+    --color-surface:    rgba(0, 0, 0, 0.6);
+    --color-window:     rgba(0, 0, 0, 0.5);
+    --color-bar:      rgba(255, 255, 255, 0.1);
+    --color-border:     rgba(255, 255, 255, 0.3);
+}
+
+
+/* toggle knop alleen laten zien als JS werkt */
+.theme-toggle { 
+    display: none;
+    color: var(--color-text);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 3rem;
+
+}
+.js .theme-toggle { 
+    display: inline-block;
 }
