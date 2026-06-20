@@ -7,47 +7,47 @@
 
 <article class="card type-{{ pokemon.type }}">
 
-  
-<header class="card-top">
-  <h1 class="card-name">{{ pokemon.name }}</h1>
-  <span class="hp"> HP {{ pokemon.stats[0].base_stat }}</span>
-</header>
+    
+  <header class="card-top">
+    <h1 class="card-name">{{ pokemon.name }}</h1>
+    <span class="hp"> HP {{ pokemon.stats[0].base_stat }}</span>
+  </header>
 
-<div class="card-window">
+  <div class="card-window">
 
-  <form class="favorite-form" action="/pokemon/{{ pokemon.id }}/favorite" method="post">
-    <button type="submit" class="favorite-button">
-      <img src="/assets/pokeball.svg" alt="" width="50" height="50">
-    </button>
-  </form>
+    <form class="favorite-form" action="/pokemon/{{ pokemon.id }}/favorite" method="post">
+      <button type="submit" class="favorite-button">
+        <img src="/assets/pokeball.svg" alt="" width="50" height="50">
+      </button>
+    </form>
 
-  <picture>
-    <source type="image/gif" srcset="{{ pokemon.image }}">
-    <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" width="150" height="150" >
-  </picture>
-</div>
+    <picture>
+      <source type="image/gif" srcset="{{ pokemon.image }}">
+      <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" width="150" height="150" >
+    </picture>
+  </div>
 
-<ul class="detail-types">
-  {% for type in pokemon.types %}
-    <li>{{ type.type.name }}</li>
-  {% endfor %}
-</ul>
+  <ul class="detail-types">
+    {% for type in pokemon.types %}
+      <li>{{ type.type.name }}</li>
+    {% endfor %}
+  </ul>
 
 <section class="detail-stats">
   <h2>Stats</h2>
-  <ul>
-    {%  for stat in pokemon.stats %}
-      <li class="stat-row">
-        <span class="stat-name">{{ stat.stat.name }}</span> 
-        <span class="stat-value">{{ stat.base_stat }}</span>
-          <div class="stat-bar">
-          <div class="stat-fill" style="width:{{ stat.base_stat }}%">
-          </div>
-          </div>
-      </li>
-    {% endfor %}
-  </ul>
-</section>
+    <dl class="detail-stats-list">
+      {%  for stat in pokemon.stats %}
+        <div class="stat-row">
+          <dt class="stat-name">{{ stat.stat.name }}</dt> 
+          <dd class="stat-value">{{ stat.base_stat }}</dd>
+            <div class="stat-bar">
+              <div class="stat-fill" style="width:{{ stat.base_stat }}%">
+              </div>
+            </div>
+        </div>
+      {% endfor %}
+    </dl>
+  </section>
 </article>
 </main>
 

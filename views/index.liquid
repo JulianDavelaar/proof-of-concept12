@@ -1,57 +1,27 @@
 {% layout 'layouts/base.liquid' %}
 {% block content %}
 
-
 <h1 class="page-title">All Pokémon</h1>
 
-<form class="search" action="/" method="get">
-  <i class="searchIcon"></i>
-  <input type="search" name="search" id="search" placeholder="Search"> 
-</form>
+<search>
+  <label class="search-label" for="search">Look up Pokémon</label>
+  <form class="search" action="/" method="get">
+    <input type="search" name="search" id="search" placeholder="Search">
+    <button class="search-button" type="submit">Submit</button>
+  </form>
+</search>
   
 <a class="favorite-link" href="/favorites">Favorites 
   <img class="favorite-button" src="/assets/pokeball.svg" alt="" width="30" height="30">
 </a>
 
-
-<ul class="pokemon-grid">
-
+<section class="pokemon-grid">
   {% for item in pokemon %}
-
-    <li class="card type-{{ item.type }}" data-name="{{ item.name }}">
-
-      <a class="card-link" href="/pokemon/{{ item.id }}">
-        <header class="card-top">
-          <h2 class="card-name">{{ item.name }}</h2>
-          <span class="hp">HP {{ item.stats[0].base_stat }}</span>
-        </header>
-      </a>
-
-      <div class="card-window">
-        <form class="favorite-form" action="/pokemon/{{ item.id }}/favorite" method="post">
-          <button type="submit" class="favorite-button">
-            <img src="/assets/pokeball.svg" alt="" width="40" height="40">
-          </button>
-        </form>
-
-        <a href="/pokemon/{{ item.id }}">
-          <picture>
-            <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" 
-              loading="
-              {% if forloop.index <= 8 %} 
-                eager
-              {% else %}
-                lazy
-              {% endif %}" decoding="async">
-          </picture>
-        </a>
-      </div>
-    </li>
-
+    {% render 'partials/pokemon-card.liquid', item: item, index: forloop.index %}
   {% else %}
-    <li class="empty-state">No Pokémon found</li>
+    <article class="empty-state">No Pokémon found</article>
   {% endfor %}
-</ul>
-
+</section>
 
 {% endblock %}
+

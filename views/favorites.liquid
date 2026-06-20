@@ -1,44 +1,18 @@
 {% layout 'layouts/base.liquid' %}
 {% block content %}
 
-
 <h1 class="page-title">My favorite pokémon</h1>
 
 <a href="/" class="back-link">Back</a>
 
 
-<ul class="pokemon-grid">
-
+<section class="pokemon-grid">
   {% for item in pokemon %}
-
-    <li class="card type-{{ item.type }}">
-
-      <a class="card-link" href="/pokemon/{{ item.id }}">
-        <header class="card-top">
-          <h2 class="card-name">{{ item.name }}</h2>
-          <span class="hp">HP {{ item.stats[0].base_stat }}</span>
-        </header>
-      </a>
-
-      <div class="card-window">
-        <form class="favorite-form" action="/pokemon/{{ item.id }}/favorite" method="post">
-          <button type="submit" class="favorite-button">
-            <img src="/assets/pokeball.svg" alt="" width="30" height="30">
-          </button>
-        </form>
-
-        <a href="/pokemon/{{ item.id }}">
-          <picture>
-            <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" >
-          </picture>
-        </a>
-      </div>
-    </li>
-
+    {% render 'partials/pokemon-card.liquid', item: item, index: forloop.index %}
   {% else %}
-    <li class="empty-state">No favorites yet - go catch some!</li>
+    <article class="empty-state">No favorites yet - go catch some!</article>
   {% endfor %}
-</ul>
+</section>
 
 
 {% endblock %}

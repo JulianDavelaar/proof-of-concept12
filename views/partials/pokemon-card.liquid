@@ -1,0 +1,33 @@
+
+<article class="card type-{{ item.type }}" data-name="{{ item.name }}">
+
+    <a class="card-link" href="/pokemon/{{ item.id }}">
+      <header class="card-top">
+        <h2 class="card-name">{{ item.name }}</h2>
+        <dl class="hp">
+          <dt>HP</dt>
+          <dd class="hp dd"> {{ item.stats[0].base_stat }} </dd>
+        </dl>
+      </header>
+    </a>
+
+      <figure class="card-window">
+        <form class="favorite-form" action="/pokemon/{{ item.id }}/favorite" method="post">
+          <button type="submit" class="favorite-button">
+            <img src="/assets/pokeball.svg" alt="" width="40" height="40">
+          </button>
+        </form>
+
+        <picture>
+          <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" 
+            loading="
+            {% if index <= 8 %} 
+              eager
+            {% else %}
+              lazy
+            {% endif %}" decoding="async">
+        </picture>
+      </figure>
+  </article>
+
+
