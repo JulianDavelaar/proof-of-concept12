@@ -4,6 +4,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     font-family: 'Pokemon', sans-serif;
+
 }
 .header {
     display: flex;
@@ -16,18 +17,41 @@ body {
     font-size: 2rem;
 }
 
+.search-button {
+    font-family: 'pokemon', sans-serif;
+    background-color: var(--pokemon-red);
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.search-label {
+    display: block;
+    text-align: center;
+}
+
 .search {
     display: flex;
-    justify-content: center;
-    padding: 0 1rem 1rem;
+    border: 2px solid var(--color-border);
+    background-color: var(--color-window);
+    align-items: center;
+    justify-items: center;
+    max-width: 400px;
+    margin: 0 auto 1rem;
 
     & input {
+        flex: 1;
+        border: none;
+        outline: none;
         width: 100%;
-        max-width: 400px;
-        padding: .5rem 1rem;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        font-size: 1rem;
+        font-size: 1rem;  
+        background-color: transparent;
+        color: var(--color-text);
+    }
+
+    & ::placeholder {
+        font-family: 'Pokemon', sans-serif;
+        color: var(--color-text);
     }
 }
 
@@ -88,12 +112,6 @@ body {
     font-size: .9rem;
 }
 
-.hp {
-    font-weight: bold;
-    white-space: nowrap;
-    font-family: 'Pokemon', sans-serif;
-    font-size: .6rem;
-}
 
 .card-window {
     position: relative;
@@ -107,13 +125,36 @@ body {
     margin: 0;
 
         & picture img {
-            width: 200px;
-            height: 200px;
-            object-fit: contain;
+            width: 90%;
+            height: 90%;
+            object-fit:contain;
     }
 }
 
+.card-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.hp {
+    display: flex;
+    font-weight: bold;
+    font-family: 'Pokemon', sans-serif;
+    font-size: .7rem;
+    align-items: center;
+    justify-items: center;
+
+        & dd {
+        margin: 0 0 0 5px;
+    }
+}
+
+
+
 .favorite-button {
+    font-family: 'pokemon', sans-serif;
     background: none;
     border: none;
     cursor: pointer;
@@ -146,6 +187,7 @@ body {
     display: flex;
     justify-content: center;
     gap: .5rem;
+    padding-bottom: 1rem;
     text-decoration: none;
     color: var(--color-text);
     font-size: 1rem;
@@ -157,6 +199,7 @@ body {
             transition: .2s;
     }
 }
+
 
 
 .type-grass { 
