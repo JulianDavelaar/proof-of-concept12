@@ -20,16 +20,17 @@ document.documentElement.classList.add('js');
 const root = document.documentElement;
 const toggle = document.querySelector('.theme-toggle')
 
-const saved = localStorage.getItem('theme');
-if (saved) {
-    root.dataset.theme = saved;
+try {
+  const saved = localStorage.getItem('theme')
+  if (saved) root.dataset.theme = saved
+} catch (e) { /* localStorage niet beschikbaar */ }
+
+if (toggle) {
+  toggle.addEventListener('click', () => {
+    const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches
+    const current = root.dataset.theme || (prefersDark ? 'dark' : 'light')
+    const next = current === 'dark' ? 'light' : 'dark'
+    root.dataset.theme = next
+    try { localStorage.setItem('theme', next) } catch (e) {}
+  })
 }
-
-toggle.addEventListener('click', () => {
-    const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
-    const current = root.dataset.theme || (prefersDark ? 'dark' : 'light');
-    const next = current === 'dark' ? 'light' : 'dark';
-
-    root.dataset.theme = next;
-    localStorage.setItem('theme', next);
-});
