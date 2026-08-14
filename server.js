@@ -20,7 +20,7 @@ app.use(function (request, response, next) {
 })
 
 // start de liquid template engine op
-const engine = new Liquid();
+const engine = new Liquid({ cache: true });
 app.engine('liquid', engine.express());
 app.set('views', './views')
 app.set('view engine', 'liquid')
@@ -66,7 +66,7 @@ app.get ('/', function (request, response) {
     return item.name.includes(search.toLowerCase())
     })
   }
-  response.render('index', { pokemon: results, search: search, title: 'All Pokémon' })
+  response.render('index', { pokemon: results, search: search, title: 'All Pokémon', page: 'index'})
 })
 
 
@@ -82,9 +82,9 @@ app.get ('/pokemon/:id', function (request, response) {
     return item.id == id
     })
     if (!foundPokemon) {
-    return response.status(404).render('404', { title: 'Pokémon not found' })
+    return response.status(404).render('404', { title: 'Pokémon not found', page: '404' })
   }
-  response.render('detail', {pokemon: foundPokemon, title: foundPokemon.name })
+  response.render('detail', {pokemon: foundPokemon, title: foundPokemon.name, page: 'detail' })
 })
 
 //Favoriet toevoegen form post zonder JS
@@ -138,7 +138,7 @@ app.get('/favorites', async function (request, response) {
     })
     .filter(function (item) { return item })
 
-  response.render('favorites', { pokemon: favoritePokemon, title: 'My favorite Pokémon' })
+  response.render('favorites', { pokemon: favoritePokemon, title: 'My favorite Pokémon', page: 'index' })
 })
 
 // 404 voor alle overige (onbekende) routes
