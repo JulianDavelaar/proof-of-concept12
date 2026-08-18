@@ -20,12 +20,7 @@
 
         <picture>
           <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150" 
-            loading="
-            {% if index <= 8 %} 
-              eager
-            {% else %}
-              lazy
-            {% endif %}" decoding="async">
+            loading="{% if index <= 8 %}eager{% else %}lazy{% endif %}" decoding="async">
         </picture>
       </figure>
   </article>
