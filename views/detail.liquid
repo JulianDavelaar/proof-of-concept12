@@ -39,11 +39,12 @@
       {%  for stat in pokemon.stats %}
         <div class="stat-row">
           <dt class="stat-name">{{ stat.stat.name }}</dt> 
-          <dd class="stat-value">{{ stat.base_stat }}</dd>
+          <dd class="stat-value">{{ stat.base_stat }}
             <div class="stat-bar">
               <div class="stat-fill" style="width:{{ stat.base_stat }}%">
               </div>
             </div>
+          </dd>
         </div>
       {% endfor %}
     </dl>
