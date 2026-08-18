@@ -17,13 +17,13 @@
   <img class="favorite-button" src="/assets/pokeball.svg" alt="" width="30" height="30">
 </a>
 
-<section class="pokemon-grid">
+<div class="pokemon-grid">
   {% for item in pokemon %}
     {% render 'partials/pokemon-card.liquid', item: item, index: forloop.index %}
   {% else %}
     <article class="empty-state">No Pokémon found</article>
   {% endfor %}
-</section>
+</div>
 
 </main>
 
