@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Pokemon';
-    src: url('/assets/fonts/pokemon-classic.ttf') format('woff2');
+    src: url('/assets/fonts/pokemon-classic.woff2') format('woff2');
     font-display: swap;
 }
 
