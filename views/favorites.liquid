@@ -8,13 +8,13 @@
 <a href="/" class="back-link">Back</a>
 
 
-<section class="pokemon-grid">
+<div class="pokemon-grid">
   {% for item in pokemon %}
     {% render 'partials/pokemon-card.liquid', item: item, index: forloop.index %}
   {% else %}
     <article class="empty-state">No favorites yet - go catch some!</article>
   {% endfor %}
-</section>
+</div>
 
 </main>
 
