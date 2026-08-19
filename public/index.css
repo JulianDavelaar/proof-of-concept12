@@ -78,6 +78,7 @@
     transition: .2s;
 
     &:hover {
-        transform: scale(1.15);
+        transform: perspective(300px), translateZ(40px);
+        filter: drop-shadow(0 6px 6px rgb(0 0 0 / 80%));
     }
 }
