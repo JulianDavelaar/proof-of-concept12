@@ -67,7 +67,8 @@
 
 /* ===== Favorieten ===== */
 
-.favorite-link {
+.favorite-link,
+.favorite-form {
     display: flex;
     justify-content: center;
     gap: .5rem;
@@ -79,6 +80,6 @@
 
     &:hover {
         transform: perspective(300px), translateZ(40px);
-        filter: drop-shadow(0 6px 6px rgb(0 0 0 / 80%));
+        filter: drop-shadow(0 6px 6px rgb(0 0 0 / 60%));
     }
 }
