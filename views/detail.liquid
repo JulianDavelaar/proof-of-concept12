@@ -8,10 +8,10 @@
 <article class="card type-{{ pokemon.type }}">
 
     
-  <header class="card-top">
+  <div class="card-top">
     <h1 class="card-name">{{ pokemon.name }}</h1>
     <span class="hp"> HP {{ pokemon.stats[0].base_stat }}</span>
-  </header>
+  </div>
 
   <div class="card-window">
 
@@ -22,7 +22,7 @@
     </form>
 
     <picture>
-      <source type="image/gif" srcset="{{ pokemon.image }}">
+      <source type="image/gif" srcset="{{ pokemon.image }}">  
       <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" width="150" height="150" >
     </picture>
   </div>

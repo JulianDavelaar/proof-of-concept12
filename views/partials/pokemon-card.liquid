@@ -2,13 +2,13 @@
 <article class="card type-{{ item.type }}" data-name="{{ item.name }}">
 
     <a class="card-link" href="/pokemon/{{ item.id }}">
-      <header class="card-top">
+      <div class="card-top">
         <h2 class="card-name">{{ item.name }}</h2>
         <dl class="hp">
           <dt>HP</dt>
           <dd class="hp dd"> {{ item.stats[0].base_stat }} </dd>
         </dl>
-      </header>
+      </div>
     </a>
 
       <figure class="card-window">
