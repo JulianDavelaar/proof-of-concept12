@@ -83,3 +83,7 @@
         filter: drop-shadow(0 6px 6px rgb(0 0 0 / 60%));
     }
 }
+
+.favorite-grid {
+    padding-top: 2em;
+}

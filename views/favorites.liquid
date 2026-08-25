@@ -8,7 +8,7 @@
 <a href="/" class="back-link">Back</a>
 
 
-<div class="pokemon-grid">
+<div class="pokemon-grid favorite-grid">
   {% for item in pokemon %}
     {% render 'partials/pokemon-card.liquid', item: item, index: forloop.index %}
   {% else %}
