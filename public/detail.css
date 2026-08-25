@@ -93,3 +93,8 @@
     }
         
 }
+
+/* Hover animatie uitgeschakeld */
+.detail .card:hover {
+    transform: none;
+}
