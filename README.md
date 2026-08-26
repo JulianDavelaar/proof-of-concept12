@@ -53,7 +53,7 @@ De server draait op `http://localhost:8000`. Opstarten duurt ~20 seconden omdat 
 
 ## Testen
 
-Alle testen (HTML-validatie, performance, screenreader, gebruikerstest) staan systematisch gedocumenteerd in [docs/testing.md](./docs/testing.md). Per test wordt een issue aangemaakt volgens [docs/issue-template-test.md](./docs/issue-template-test.md).
+Alle testen (HTML-validatie, performance, screenreader, gebruikerstest) staan systematisch gedocumenteerd in issues. Per test wordt een issue aangemaakt volgens een vaste template.
 
 ## Bronnen
 
