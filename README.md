@@ -1,10 +1,12 @@
-Ontwerp en maak een data driven online concept voor een opdrachtgever
+# Pokémon overview
 
-De instructies voor deze opdracht staan in: [docs/INSTRUCTIONS.md](https://github.com/fdnd-task/proof-of-concept/blob/main/docs/INSTRUCTIONS.md)
+Een responsive Pokémon-overzicht, gebouwd voor Hypersolid met data uit de PokéAPI en een Directus-database voor favorieten.
 
-# Titel
-Pokémon overview
-Een responsive pokémon overzicht, gebouwt voor Hypersolid met data uit de PokéAPI en Directus database voor favorieten.
+> FDND-opdracht: [Ontwerp en maak een data driven online concept voor een opdrachtgever](https://github.com/fdnd-task/proof-of-concept/blob/main/docs/INSTRUCTIONS.md)
+
+![Screenshot van de Pokémon overview](https://github.com/user-attachments/assets/bcc9959d-ede8-48fe-9ffe-d317ed0a81b0)
+
+Live: https://proof-of-concept12-3.onrender.com/
 
 ## Inhoudsopgave
 
@@ -12,50 +14,54 @@ Een responsive pokémon overzicht, gebouwt voor Hypersolid met data uit de Poké
   * [Gebruik](#gebruik)
   * [Kenmerken](#kenmerken)
   * [Installatie](#installatie)
+  * [Testen](#testen)
   * [Bronnen](#bronnen)
   * [Licentie](#licentie)
 
 ## Beschrijving
-Data-driven website van een pokémon overview, server-side rendering met Express en liquid.
-- Live search bar
-- Responsive grid
-- Favorite toggle
-  <img width="1897" height="868" alt="image" src="https://github.com/user-attachments/assets/bcc9959d-ede8-48fe-9ffe-d317ed0a81b0" />
-  - live render link: https://proof-of-concept12-3.onrender.com/
 
+Data-driven website met server-side rendering via Express en Liquid.
+
+- Live search (werkt ook zonder JS)
+- Responsive kaarten-grid met type-kleuren
+- Favorieten toevoegen/verwijderen, opgeslagen in Directus
 
 ## Gebruik
-Als bezoeker wil ik alle pokémon kunnen zien die er zijn en deze kunnen opzoeken en markeren als favoriet.
-Bij het opstarten van de pagina land je op een overview van de Pokémon, beginnende met de aller eerste. 
-Vanuit daar kun je scrollen om de Pokémon lijst te bekijken, je kan ook zoeken op naam. 
-Als je op een Pokémon klikt kan je de details van deze Pokémon zien, stats, hp, etc
-Je kan elke Pokémon vanuit elk scherm markeren als favoriet, 
-de gemarkeerde Pokémon zijn terug te vinden in het favorieten scherm, hier kan je komen vanuit de overview
 
+Als bezoeker wil ik alle Pokémon kunnen zien, ze kunnen opzoeken en markeren als favoriet.
+
+Bij het openen land je op een overview van alle Pokémon, beginnend bij de allereerste. Je kan scrollen door de lijst of zoeken op naam. Klik je op een Pokémon, dan zie je de detailpagina met stats. Elke Pokémon kan je vanuit elk scherm markeren als favoriet; je favorieten vind je terug op het favorietenscherm, bereikbaar vanaf de overview.
 
 ## Kenmerken
-- HTML structuur met liquid: semantisch. `<article>` voor kaarten `<search>`, `<dl>` voor stats. Layout inheritance `{% layout %}` + `{% block %}`
-- CSS: page-specifieke bestanden + stylesheet, nesting en mobile-first media queries
-- JS: minimaal, async/await voor live zoekfunctie
-- NodeJS/Express/compression: statische Pokémon, wordt bij startup 1x opgehaald. 
-<!-- Bij Kenmerken staat welke technieken zijn gebruikt en hoe. Wat is de HTML structuur? Wat zijn de belangrijkste dingen in CSS? Wat is er met JS gedaan en hoe? Misschien heb je iets met NodeJS gedaan, of heb je een framwork of library gebruikt? -->
+
+- **HTML/Liquid**: semantische structuur — `<article>` voor kaarten, `<search>` voor de zoekbalk, `<dl>` voor stats. Layout-inheritance met `{% layout %}` + `{% block %}`.
+- **CSS**: page-specifieke bestanden + gedeelde stylesheet. Selectors en media queries genest per component, mobile first (grid: 2 → 3 → 4 kolommen). Kleuren via custom properties.
+- **JS**: minimaal, alleen als enhancement — async/await voor de live zoekfunctie.
+- **Node/Express**: Pokémon-data wordt bij startup één keer opgehaald uit de PokéAPI en daarna uit het geheugen geserveerd. Compression-middleware voor kleinere responses.
+- **Progressive enhancement**: zoeken werkt als form GET (serverfilter) zonder JS, mét JS wordt er live gefilterd. Favoriet-toggle werkt zonder JS via een POST-form, met bevestigingsmelding.
 
 ## Installatie
-- NodeJS stappen: git clone -> npm install -> npm start.
-- opstarten ~20s
-- draait op `http://localhost:8000`
-<!-- Bij Instalatie staat hoe een andere developer aan jouw repo kan werken -->
 
+```bash
+git clone https://github.com/juuldavelaar/proof-of-concept12.git
+cd proof-of-concept12
+npm install
+npm start
+```
 
+De server draait op `http://localhost:8000`. Opstarten duurt ~20 seconden omdat alle Pokémon-data één keer wordt opgehaald.
 
-- responsive kaart grid, mobile first, type-kleuren, hover. 2 - 3 - 4 kolommen.
-- Live search, werkt als form GET (server filter), met JS live filteren. (progressive enhancement)
-- favoriet toggle, POST naar Directus. toevoegen/verwijderen, bevestigingsmelding POST met UI-states. werkt zonder JS
+## Testen
 
-
-
+Alle testen (HTML-validatie, performance, screenreader, gebruikerstest) staan systematisch gedocumenteerd in [docs/testing.md](./docs/testing.md). Per test wordt een issue aangemaakt volgens [docs/issue-template-test.md](./docs/issue-template-test.md).
 
 ## Bronnen
+
+<!-- TODO juul: vul aan met de bronnen die je écht gebruikt hebt, volgens je wiki-conventie: link + wat je ermee gedaan hebt -->
+
+- [PokéAPI](https://pokeapi.co/docs/v2) — documentatie voor de endpoints en datastructuur van de Pokémon-data
+- [Directus API reference](https://directus.io/docs/api) — voor het opslaan en verwijderen van favorieten (POST/DELETE naar de items-endpoint)
+- [LiquidJS](https://liquidjs.com/tutorials/layouts.html) — layout-inheritance met `{% layout %}` en `{% block %}`
 
 ## Licentie
 
